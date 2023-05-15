@@ -1,0 +1,143 @@
+body{
+    background-color: white;
+    font-family:Arial, Helvetica, sans-serif;
+    
+   
+   
+   }
+   
+.header {
+     
+    height: 60px;
+   font-size: 20px;
+    display: flex; 
+    justify-content: space-between;
+    border-bottom:1px solid  rgb(0, 0, 0);
+   font-size:large;
+    margin-bottom: 20px;
+    
+     
+}
+
+.capa{
+    display: flex;
+    align-items: center;
+    margin:15px ;
+   
+}
+.calendario {
+    display: flex;
+    align-content: flex-start;
+    align-items: flex-end;
+    margin: 20px;
+     
+}
+
+.revisar{
+    display: flex;
+    align-content: flex-start;
+    align-items: flex-end; 
+}
+   
+  
+  
+.googleclassroom {
+   justify-content:left;
+   display: flex;
+   margin :15px;
+   align-items: center;
+   justify-content:center ;
+   gap: 5px;
+   font-size: 20px;
+}
+
+.google{
+    display: flex;
+    justify-content:center ;
+    margin: 10px;
+}
+  
+  
+  
+.image img{
+    margin: 10px;
+      
+}
+  
+.containerclass{
+   display: inline-block;
+}
+ 
+  
+ 
+.cuadro{
+    margin:20px;
+    display: flex;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    text-align: center;
+    grid-gap: 30px;
+    width:300px;
+    height: 320px;
+    border: 1px solid rgb(156, 156, 156);
+    background-color: rgb(255, 255, 255);
+    text-align:center;
+    border-radius: 19px;
+    justify-items: center;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    border-top: 1px solid #fcfcfc;
+}
+  
+  
+.cuadrito{
+    width:300px;
+    height: 139px;
+    background-color:rgb(36, 21, 172);
+    display: flex;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    font-size: xx-small;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+  
+.cuadrito img{
+    width:30px;
+    height: 40px;
+    margin: 10px;
+
+}
+  
+.cuadrito span{
+    display: flex;
+    align-items: flex-start;
+    font-size:medium;
+    margin: 20px;
+    color: rgb(255, 255, 255);
+}
+
+  
+  
+   
+.iconos{
+    height: 50px;
+    border-top: 1px solid #bdbdbd;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    font-weight: 100px;
+    
+}  
+.iconos img{
+    display: flex;
+    margin: 10px;
+   
+}
+
+.letrica {
+    margin:2px
+}  
+
