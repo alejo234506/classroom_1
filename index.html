@@ -1,107 +1,197 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./classroom.png">
-    <title>classroom</title>
-    <link rel="stylesheet" href="./styles/style_classroom.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Aula: proyecto de práctica en HTML, CSS y JavaScript inspirado en interfaces de aulas virtuales.">
+  <meta name="color-scheme" content="light dark">
+  <title>Aula · Mis clases</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles/styles.css">
+  <script>
+    // Aplica el tema guardado antes de pintar para evitar parpadeos.
+    (function () {
+      try {
+        var t = localStorage.getItem('aula-tema');
+        if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) { /* almacenamiento no disponible */ }
+    })();
+  </script>
+  <script src="js/app.js" defer></script>
 </head>
-
 <body>
-    <div class="header">  
-           
-        <div class="googleclassroom">
-            <img  class="menu" src="imagenes/menu.svg" alt="no aparece">
-            <div class="google "> <img src="imagenes/googlelogosvg.svg" alt="no apareciste ">
-                <span class="letrica "> classroom</span> </div>
-        </div>
-        <div class="image">
-            <img src="imagenes/mas.svg" alt="no aparece" >
-            <img src="imagenes/apps.svg" alt="no aparece">
-            <img src="imagenes/cuenta.svg" alt="no aparece">
-        </div>
+  <!-- Sprite de iconos (originales, trazos simples) -->
+  <svg width="0" height="0" class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 12l3 3 5-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 12h6M9 16h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-dots" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.8" fill="currentColor"/><circle cx="12" cy="12" r="1.8" fill="currentColor"/><circle cx="12" cy="19" r="1.8" fill="currentColor"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 21a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-logo" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#0f9d76"/><path d="M6 13l10-5 10 5-10 5z" fill="#fff"/><path d="M10 15.5v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5l-6 3z" fill="#fff" opacity=".85"/><path d="M25 13v6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="topbar">
+    <div class="topbar__start">
+      <button class="icon-btn" id="btn-menu" type="button" aria-label="Abrir menú" aria-controls="sidebar" aria-expanded="false">
+        <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+      </button>
+      <a class="brand" href="#/" aria-label="Aula, ir a mis clases">
+        <svg class="brand__logo" aria-hidden="true"><use href="#i-logo"/></svg>
+        <span class="brand__name">Aula</span>
+      </a>
+      <nav class="crumbs" aria-label="Ubicación" id="crumbs" hidden>
+        <span aria-hidden="true">›</span>
+        <span id="crumb-name"></span>
+      </nav>
     </div>
-    
-    <div class="main">
-      
-        <div class="capa">
-            <span  class="revisar "> <img src="imagenes/carpeta2.svg" alt="no aparece ">
-                PARA REVISAR </span>
-            
-            <span class="calendario "> <img src="imagenes/calendar.svg" alt="no aprece ">
-                CALENDARIO </span>
-        </div>
-        
-        <div class="containerclass">
-            <div class="cuadro">
-                <div class="cuadrito" >
-                     
-                     <a href="/novedades.html" class="texto encima "><span >DESARROLLO WEB 4TA C..</span></a>
-                     <img src="imagenes/opciones.svg" alt="" class="encima_2">
-                </div>
-                <div class="mitad">
-                  
-                </div>
-                <div class="iconos">
-                  <img src="imagenes/carpeta.svg" alt="teri">
-                  <img src="imagenes/flechaup.svg" alt="tethsjd">
-                  
-                </div>
-            </div>
-
-            
-        </div>
-
-        <div class="containerclass">
-            <div class="cuadro">
-                <div class="cuadrito" >
-                     
-                     <a href="/novedades.html" class="texto encima "><span >DESARROLLO WEB 4TA C..</span></a>
-                     <img src="imagenes/opciones.svg" alt="" class="encima_2">
-                </div>
-                <div class="mitad">
-                  
-                </div>
-                <div class="iconos">
-                  <img src="imagenes/carpeta.svg" alt="teri">
-                  <img src="imagenes/flechaup.svg" alt="tethsjd">
-                  
-                </div>
-            </div>
-
-            
-        </div>
-        <div class="containerclass">
-            <div class="cuadro">
-                <div class="cuadrito" >
-                     
-                     <a href="/novedades.html" class="texto encima "><span >DESARROLLO WEB 4TA C..</span></a>
-                     <img src="imagenes/opciones.svg" alt="" class="encima_2">
-                </div>
-                <div class="mitad">
-                  
-                </div>
-                <div class="iconos">
-                  <img src="imagenes/carpeta.svg" alt="teri">
-                  <img src="imagenes/flechaup.svg" alt="tethsjd">
-                  
-                </div>
-            </div>
-
-            
-        </div>
-            
-      
-    
-
+    <div class="topbar__end">
+      <button class="icon-btn" id="btn-theme" type="button" aria-label="Activar modo oscuro" aria-pressed="false">
+        <svg class="icon icon--moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        <svg class="icon icon--sun" aria-hidden="true"><use href="#i-sun"/></svg>
+      </button>
+      <button class="icon-btn" id="btn-new" type="button" aria-label="Crear clase">
+        <svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>
+      </button>
+      <span class="avatar" aria-label="Perfil de estudiante" role="img">SA</span>
     </div>
-    
-        
-        
+  </header>
 
+  <div class="layout">
+    <aside class="sidebar" id="sidebar" aria-label="Navegación principal">
+      <nav>
+        <ul class="nav">
+          <li><a class="nav__item" href="#/" data-nav="home"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg><span>Clases</span></a></li>
+          <li><a class="nav__item" href="#/calendario" data-nav="calendario"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg><span>Calendario</span></a></li>
+          <li><a class="nav__item" href="#/revisar" data-nav="revisar"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Para revisar</span></a></li>
+        </ul>
+        <h2 class="nav__heading" id="nav-inscritas">Inscritas</h2>
+        <ul class="nav" id="nav-classes" aria-labelledby="nav-inscritas"></ul>
+      </nav>
+    </aside>
+    <div class="scrim" id="scrim" hidden></div>
+
+    <main class="content" id="contenido" tabindex="-1">
+      <!-- Vista: lista de clases -->
+      <section class="view" id="view-home" aria-labelledby="home-title">
+        <div class="view__head">
+          <h1 id="home-title">Mis clases</h1>
+          <button class="btn btn--primary" type="button" data-action="new-class">
+            <svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg> Crear clase
+          </button>
+        </div>
+        <ul class="grid" id="class-grid"></ul>
+      </section>
+
+      <!-- Vista: detalle de clase -->
+      <section class="view" id="view-class" aria-labelledby="class-title" hidden>
+        <div class="tabs" role="tablist" aria-label="Secciones de la clase">
+          <button class="tab" role="tab" id="tab-tablon" aria-controls="panel-tablon" aria-selected="true">Tablón</button>
+          <button class="tab" role="tab" id="tab-trabajo" aria-controls="panel-trabajo" aria-selected="false" tabindex="-1">Trabajo de clase</button>
+          <button class="tab" role="tab" id="tab-personas" aria-controls="panel-personas" aria-selected="false" tabindex="-1">Personas</button>
+        </div>
+
+        <div class="banner" id="class-banner">
+          <h1 id="class-title"></h1>
+          <p id="class-section"></p>
+        </div>
+
+        <div class="panel" role="tabpanel" id="panel-tablon" aria-labelledby="tab-tablon">
+          <div class="stream">
+            <aside class="upcoming" aria-labelledby="upcoming-title">
+              <h2 id="upcoming-title">Próximas entregas</h2>
+              <p>¡Excelente! No tienes tareas para entregar pronto.</p>
+              <a href="#/revisar">Ver todo</a>
+            </aside>
+            <div class="stream__main">
+              <form class="composer" id="post-form">
+                <label for="post-text" class="visually-hidden">Anuncia algo a tu clase</label>
+                <textarea id="post-text" rows="2" placeholder="Anuncia algo a tu clase…" required maxlength="500"></textarea>
+                <div class="composer__actions">
+                  <button class="btn btn--primary" type="submit">Publicar</button>
+                </div>
+              </form>
+              <ul class="posts" id="post-list" aria-live="polite"></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" role="tabpanel" id="panel-trabajo" aria-labelledby="tab-trabajo" hidden>
+          <div id="topic-list"></div>
+        </div>
+
+        <div class="panel" role="tabpanel" id="panel-personas" aria-labelledby="tab-personas" hidden>
+          <section class="people" aria-labelledby="h-docentes">
+            <h2 id="h-docentes">Docentes</h2>
+            <ul id="teacher-list"></ul>
+          </section>
+          <section class="people" aria-labelledby="h-companeros">
+            <h2 id="h-companeros">Compañeros <span class="count" id="student-count"></span></h2>
+            <ul id="student-list"></ul>
+          </section>
+        </div>
+      </section>
+
+      <!-- Vista: sección simple -->
+      <section class="view" id="view-simple" aria-labelledby="simple-title" hidden>
+        <div class="empty">
+          <svg class="empty__icon" aria-hidden="true"><use href="#i-calendar"/></svg>
+          <h1 id="simple-title"></h1>
+          <p id="simple-text"></p>
+          <a class="btn btn--ghost" href="#/">Volver a mis clases</a>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <p>Proyecto de práctica inspirado en interfaces de aulas virtuales. No afiliado a Google.</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Modal: crear clase -->
+  <dialog class="modal" id="new-class-dialog" aria-labelledby="dlg-title">
+    <form method="dialog" id="new-class-form" novalidate>
+      <div class="modal__head">
+        <h2 id="dlg-title">Crear clase</h2>
+        <button class="icon-btn" type="button" data-action="close-dialog" aria-label="Cerrar">
+          <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+      </div>
+      <div class="field">
+        <label for="f-name">Nombre de la clase <span aria-hidden="true">*</span></label>
+        <input id="f-name" name="name" required maxlength="60" autocomplete="off" aria-describedby="f-name-error">
+        <p class="field__error" id="f-name-error" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for="f-section">Sección</label>
+        <input id="f-section" name="section" maxlength="60" autocomplete="off" placeholder="Ej. Grupo 2 · Jornada tarde">
+      </div>
+      <div class="field">
+        <label for="f-teacher">Docente</label>
+        <input id="f-teacher" name="teacher" maxlength="60" autocomplete="off" placeholder="Ej. Prof. Laura Gómez">
+      </div>
+      <fieldset class="field colors">
+        <legend>Color del banner</legend>
+        <div class="colors__row" id="color-options"></div>
+      </fieldset>
+      <div class="modal__actions">
+        <button class="btn btn--ghost" type="button" data-action="close-dialog">Cancelar</button>
+        <button class="btn btn--primary" type="submit" value="create">Crear</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
-
 </html>
