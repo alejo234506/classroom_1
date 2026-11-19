@@ -37,7 +37,7 @@
     ]
   };
 
-  var STUDENTS = ['Sergio Salazar', 'Valentina Ruiz', 'Mateo Cárdenas', 'Daniela Ospina', 'Santiago Herrera', 'Mariana López', 'Juan Pablo Vargas', 'Isabella Castro'];
+  var STUDENTS = ['Valentina Ruiz', 'Mateo Cárdenas', 'Daniela Ospina', 'Santiago Herrera', 'Mariana López', 'Juan Pablo Vargas', 'Isabella Castro'];
 
   var SIMPLE_VIEWS = {
     calendario: { title: 'Calendario', text: 'Aquí verías las fechas de entrega de todas tus clases. Esta sección es parte del ejercicio y no tiene eventos todavía.' },
